@@ -77,27 +77,15 @@ export const CONTENT = {
       items: [
         {
           quote:
-            "入行前我做酒店，最擔心的是「無底薪」。區域的後勤同事幫我把行政、保單同理賠流程全部接住，我第一年就可以專心見客，唔需要邊做邊摸索。",
-          name: "PLACEHOLDER 顧問 A",
-          detail: "2023 年入職 · 前酒店業",
+            "Portfolio Management 給了我一個平台，讓我成長得比想像中更快。單是大灣區的接觸面，已經改變了我的人生。",
+          name: "Alex Wong",
+          detail: "28 歲 · 高級顧問",
         },
         {
           quote:
-            "我喜歡這裡沒有「一定」的路。你可以選擇純做銷售，也可以選擇帶團隊；轉路線的時候，區域會給你培訓，不會讓你自生自滅。",
-          name: "PLACEHOLDER 顧問 B",
-          detail: "2019 年入職 · MDRT 會員",
-        },
-        {
-          quote:
-            "我最初只是想找一份「時間彈性」的工作。做落才發現，這裡真正給我的是專業——客戶問的問題，我今日答得到，是因為背後有人在教我。",
-          name: "PLACEHOLDER 顧問 C",
-          detail: "2021 年入職 · 前教育界",
-        },
-        {
-          quote:
-            "口岸分行係一個好特別嘅平台。每日見到嘅客人都唔同，你唔會覺得自己困在一個寫字樓裡面。",
-          name: "PLACEHOLDER 顧問 D",
-          detail: "2022 年入職 · 口岸分行",
+            "清晰的晉升路徑、強大的支援，還有實實在在的收入。這正是我找了十年的公司。",
+          name: "Karen Chan",
+          detail: "35 歲 · 區域經理",
         },
       ],
     },
@@ -201,7 +189,7 @@ export const CONTENT = {
       eyebrow: "AIA · Portfolio Management District",
       titleLine1: "Join the MTR network's only insurance partner",
       titleLine2: "Build something bigger in the Greater Bay Area's one-hour living circle",
-      sub: "We started in 2009 with 50 people. Today the district is 500 consultants strong. Where your career goes depends a lot on which platform you stand on — exclusive rail-border branches, serious back-office support and a clear promotion ladder, so you can focus on clients and income.",
+      sub: "GBA access. Unlimited earning potential. A family that never leaves you behind. Join Portfolio Management and step into a career where your income grows with you.",
       softNote: "Meeting us commits you to nothing. We would just like to hear what you are thinking.",
       ctaPrimary: "Book a career chat",
       ctaSecondary: "Why choose us",
@@ -251,27 +239,15 @@ export const CONTENT = {
       items: [
         {
           quote:
-            "I came from a hotel background and my biggest worry was having no base salary. The district back office took the admin, policy and claims work off my plate, so in my first year I could just focus on meeting clients.",
-          name: "PLACEHOLDER Consultant A",
-          detail: "Joined 2023 · ex-hospitality",
+            "Portfolio Management gave me the platform to grow faster than I ever thought possible. The GBA access alone changed my life.",
+          name: "Alex Wong",
+          detail: "28 · Senior Consultant",
         },
         {
           quote:
-            "What I like is that there is no single prescribed path. You can stay in sales or move into leading a team, and the district trains you through the switch instead of leaving you on your own.",
-          name: "PLACEHOLDER Consultant B",
-          detail: "Joined 2019 · MDRT member",
-        },
-        {
-          quote:
-            "At first I was only looking for flexible hours. What I actually got was professional depth — I can answer my clients' questions today because someone taught me how.",
-          name: "PLACEHOLDER Consultant C",
-          detail: "Joined 2021 · ex-education",
-        },
-        {
-          quote:
-            "A border branch is a very different platform. The clients are different every day, and you never feel stuck in one office.",
-          name: "PLACEHOLDER Consultant D",
-          detail: "Joined 2022 · border branch",
+            "Clear career path, strong support, and real money. This is the agency I've been 10 years looking for.",
+          name: "Karen Chan",
+          detail: "35 · Regional Manager",
         },
       ],
     },

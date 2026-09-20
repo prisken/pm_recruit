@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import type { Lang } from "@/lib/site";
 import { waLink } from "@/lib/site";
 import { content } from "@/lib/content";
@@ -10,6 +13,15 @@ import { content } from "@/lib/content";
 export default function FloatingWhatsApp({ lang }: { lang: Lang }) {
   const c = content(lang);
   const text = lang === "zh" ? "你好，我想了解顧問事業發展。" : "Hi, I'd like to know more about a career here.";
+
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setShow(window.scrollY > window.innerHeight * 0.85);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  if (!show) return null;
 
   return (
     <a
