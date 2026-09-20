@@ -16,6 +16,7 @@ export const CONTENT = {
     otherLangName: "EN",
     nav: {
       why: "為何加入我們",
+      whyShort: "為何加入",
       branches: "鐵路分行",
       insights: "最新觀點",
       book: "立即預約",
@@ -191,6 +192,7 @@ export const CONTENT = {
     otherLangName: "中文",
     nav: {
       why: "Why join us",
+      whyShort: "Why us",
       branches: "Rail branches",
       insights: "Insights",
       book: "Book now",

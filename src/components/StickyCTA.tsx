@@ -17,15 +17,15 @@ export default function StickyCTA({ lang }: { lang: Lang }) {
       <div className="flex items-center gap-2">
         <Link
           href={route(lang, "/book")}
-          className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full bg-gold px-5 text-sm font-bold text-navy-deep active:bg-gold-light"
+          className="inline-flex min-h-12 flex-1 items-center justify-center whitespace-nowrap rounded-full bg-gold px-4 text-sm font-bold text-navy-deep active:bg-gold-light"
         >
-          {c.hero.ctaPrimary}
+          {c.nav.book}
         </Link>
         <Link
           href={route(lang, "/why-join-us")}
-          className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/20 px-4 text-xs font-semibold text-white/80"
+          className="inline-flex min-h-12 shrink-0 items-center justify-center whitespace-nowrap rounded-full border border-white/20 px-4 text-xs font-semibold text-white/80"
         >
-          {c.nav.why}
+          {c.nav.whyShort}
         </Link>
       </div>
     </div>
