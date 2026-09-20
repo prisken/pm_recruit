@@ -13,6 +13,11 @@ export const metadata: Metadata = {
   description:
     "Portfolio Management District — an AIA financial planning district and the only insurance partner across Hong Kong's rail network, with branches at West Kowloon, Lo Wu and Lok Ma Chau. Explore a career as a consultant.",
   robots: { index: true, follow: true },
+  icons: {
+    icon: [{ url: "/icon.png", type: "image/png", sizes: "64x64" }],
+    shortcut: "/favicon.ico",
+    apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
+  },
 };
 
 export const viewport: Viewport = {

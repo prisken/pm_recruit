@@ -18,7 +18,7 @@ export const CONTENT = {
       why: "為何加入我們",
       branches: "鐵路分行",
       insights: "最新觀點",
-      book: "預約",
+      book: "立即預約",
     },
     hero: {
       eyebrow: "友邦保險 · 資產管理區域 Portfolio Management District",
@@ -33,7 +33,7 @@ export const CONTENT = {
     stats: [
       { value: "500+", label: "精英顧問", note: "由 2009 年的 50 人起步" },
       { value: "MDRT · TOT · COT", label: "眾多會員", note: "業界公認的專業肯定" },
-      { value: "唯一", label: "全港鐵路保險合作夥伴", note: "西九龍 · 羅湖 · 落馬洲" },
+      { value: "3 間分行", label: "全港鐵路唯一保險合作夥伴", note: "西九龍 · 羅湖 · 落馬洲" },
       { value: "清晰", label: "晉升階梯", note: "個人銷售或營業管理，自選路線" },
     ],
     pillarsHeading: "為什麼選擇我們",
@@ -193,7 +193,7 @@ export const CONTENT = {
       why: "Why join us",
       branches: "Rail branches",
       insights: "Insights",
-      book: "Book",
+      book: "Book now",
     },
     hero: {
       eyebrow: "AIA · Portfolio Management District",
@@ -208,7 +208,7 @@ export const CONTENT = {
     stats: [
       { value: "500+", label: "Consultants", note: "Up from 50 people in 2009" },
       { value: "MDRT · TOT · COT", label: "Members", note: "Industry-recognised recognition" },
-      { value: "Only one", label: "Insurance partner on HK rail", note: "West Kowloon · Lo Wu · Lok Ma Chau" },
+      { value: "3 branches", label: "The only insurance partner on Hong Kong's rail network", note: "West Kowloon · Lo Wu · Lok Ma Chau" },
       { value: "Two tracks", label: "Clear promotion ladder", note: "Personal sales or business management" },
     ],
     pillarsHeading: "Why choose us",
