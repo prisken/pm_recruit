@@ -1,66 +1,101 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { Lang } from "@/lib/site";
 import { route } from "@/lib/site";
 import { content } from "@/lib/content";
+import { pages } from "@/lib/pages-content";
+import FadeIn from "@/components/FadeIn";
+import PageHero from "@/components/ui/PageHero";
+import SectionHeading from "@/components/ui/SectionHeading";
+import CompareTable from "@/components/ui/CompareTable";
+import FaqList from "@/components/ui/FaqList";
+import ToConfirm from "@/components/ui/ToConfirm";
+import CtaBand from "@/components/ui/CtaBand";
 
 /**
- * Phase 1 stub for the hero's secondary CTA.
- * Kept short on purpose — the full "why join us" page is a later phase.
+ * Phase 2 — full "Why join us" page.
+ * Hero → top CTA → 4 pillars with proof → comparison → FAQ → bottom CTA.
  */
 export default function WhyJoinUsView({ lang }: { lang: Lang }) {
+  const w = pages(lang).why;
   const c = content(lang);
 
   return (
     <main className="min-h-dvh overflow-x-hidden bg-paper">
-      <section className="bg-navy-deep py-14 text-white sm:py-20">
-        <div className="mx-auto max-w-content px-4 sm:px-6">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-gold">
-            {c.hero.eyebrow}
-          </p>
-          <h1 className="mt-4 max-w-3xl text-3xl font-bold leading-snug sm:text-4xl">{c.why.heading}</h1>
-          <p className="mt-4 text-sm text-gold-light">{c.why.intro}</p>
+      <PageHero eyebrow={w.eyebrow} title={w.title} intro={w.intro}>
+        {/* CTA at the top, as briefed */}
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <Link
+            href={route(lang, "/book")}
+            className="inline-flex min-h-12 items-center justify-center rounded-full bg-gold px-7 text-sm font-bold text-navy-deep transition-colors hover:bg-gold-light"
+          >
+            {c.hero.ctaPrimary}
+          </Link>
+          <Link
+            href={route(lang, "/our-story")}
+            className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/25 px-7 text-sm font-semibold text-white/85 transition-colors hover:bg-white/10"
+          >
+            {pages(lang).nav.story}
+          </Link>
         </div>
-      </section>
+        <p className="mt-5 text-xs text-white/50">{c.hero.softNote}</p>
+      </PageHero>
 
-      <section className="mx-auto max-w-content px-4 py-14 sm:px-6 sm:py-16">
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
-          <div className="space-y-4">
-            {c.why.body.map((p) => (
-              <p key={p} className="prose-cjk text-[15px] text-ink/80">
-                {p}
-              </p>
-            ))}
-            <Link
-              href={route(lang, "/book")}
-              className="mt-4 inline-flex min-h-12 items-center justify-center rounded-full bg-gold px-7 text-sm font-bold text-navy-deep transition-colors hover:bg-gold-light"
-            >
-              {c.why.cta}
-            </Link>
-          </div>
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-card">
-            <Image
-              src="/images/team-wide.jpg"
-              alt={c.hero.imageAlt}
-              fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover"
-            />
-          </div>
-        </div>
-
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {c.pillars.map((p, i) => (
-            <article key={p.title} className="rounded-2xl border border-navy/10 bg-white p-6 shadow-card">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/40 text-sm font-bold text-gold-dark">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h2 className="mt-4 text-base font-bold leading-snug text-navy">{p.title}</h2>
-              <p className="prose-cjk mt-3 text-sm text-muted">{p.body}</p>
-            </article>
+      {/* 4 pillars, expanded, each with its evidence */}
+      <section className="mx-auto max-w-content px-4 py-16 sm:px-6 sm:py-20">
+        <FadeIn>
+          <SectionHeading eyebrow={w.pillarsHeading} title={w.pillarsHeading} sub={w.pillarsSub} />
+        </FadeIn>
+        <div className="mt-10 grid gap-5 sm:grid-cols-2">
+          {w.pillars.map((p, i) => (
+            <FadeIn key={p.title} delay={i * 60} className="h-full">
+              <article className="flex h-full flex-col rounded-2xl border border-navy/10 bg-white p-6 shadow-card sm:p-7">
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/40 text-sm font-bold text-gold-dark">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-4 text-lg font-bold leading-snug text-navy">{p.title}</h3>
+                <p className="prose-cjk mt-3 text-sm text-muted">{p.body}</p>
+                <p className="prose-cjk mt-4 rounded-xl border border-gold/25 bg-gold/5 px-3 py-2 text-xs text-gold-dark">
+                  {p.proof}
+                </p>
+              </article>
+            </FadeIn>
           ))}
         </div>
       </section>
+
+      {/* Comparison */}
+      <section className="border-t border-navy/10 bg-white py-16 sm:py-20">
+        <div className="mx-auto max-w-content px-4 sm:px-6">
+          <FadeIn>
+            <SectionHeading eyebrow={w.compareHeading} title={w.compareHeading} sub={w.compareIntro} />
+          </FadeIn>
+          <div className="mt-9">
+            <CompareTable
+              lang={lang}
+              rows={w.compareRows}
+              usLabel={w.usLabel}
+              otherLabel={w.otherLabel}
+              note={w.compareNote}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="mx-auto max-w-content px-4 py-16 sm:px-6 sm:py-20">
+        <FadeIn>
+          <SectionHeading title={w.faqHeading} />
+        </FadeIn>
+        <FaqList items={w.faq} />
+        <div className="mt-5">
+          <p className="text-xs leading-relaxed text-muted">{w.faqNote}</p>
+        </div>
+        <div className="mt-4">
+          <ToConfirm lang={lang}>FAQ 第 6 條（入職要求與流程）</ToConfirm>
+        </div>
+      </section>
+
+      <CtaBand lang={lang} heading={w.ctaHeading} body={w.ctaBody} />
     </main>
   );
 }
