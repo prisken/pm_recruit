@@ -3,6 +3,8 @@ import Image from "next/image";
 import type { Lang } from "@/lib/site";
 import { BRANCHES, SITE, route, waLink } from "@/lib/site";
 import { content } from "@/lib/content";
+import { pages } from "@/lib/pages-content";
+import { INSIGHT_POSTS } from "@/lib/insights";
 import FadeIn from "@/components/FadeIn";
 
 /**
@@ -24,13 +26,17 @@ export default function HomeView({ lang }: { lang: Lang }) {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center opacity-25"
+          className="object-cover object-center opacity-60"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-b from-navy-deep/80 via-navy-deep/75 to-navy-deep"
+          className="absolute inset-0 bg-gradient-to-b from-navy-deep/50 via-navy-deep/40 to-navy-deep"
           aria-hidden="true"
         />
-        <div className="relative mx-auto max-w-content px-4 pb-16 pt-14 sm:px-6 sm:pb-24 sm:pt-20">
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-navy-deep/88 via-navy-deep/50 to-transparent"
+          aria-hidden="true"
+        />
+        <div className="relative mx-auto max-w-content px-4 pb-6 pt-10 sm:px-6 sm:pb-24 sm:pt-20">
           <FadeIn>
             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-gold">
               {c.hero.eyebrow}
@@ -62,7 +68,7 @@ export default function HomeView({ lang }: { lang: Lang }) {
 
       {/* ── Stats bar ──────────────────────────────────────── */}
       <section className="border-y border-navy-line/40 bg-navy" aria-label={c.stats.map((s) => s.label).join(", ")}>
-        <div className="mx-auto grid max-w-content grid-cols-2 gap-x-4 gap-y-7 px-4 py-9 sm:px-6 lg:grid-cols-4">
+        <div className="mx-auto grid max-w-content grid-cols-2 gap-x-4 gap-y-5 px-4 py-6 sm:px-6 sm:py-9 lg:grid-cols-4">
           {c.stats.map((s) => (
             <div key={s.label}>
               <p className="text-xl font-bold leading-tight text-gold sm:text-2xl">{s.value}</p>
@@ -172,23 +178,26 @@ export default function HomeView({ lang }: { lang: Lang }) {
             <p className="mt-2 text-sm text-muted">{c.insights.sub}</p>
           </FadeIn>
           <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {c.insights.items.map((it, i) => (
-              <FadeIn key={it.title} delay={i * 50}>
-                {/* Blog routes arrive in a later phase — teasers link nowhere for now. */}
-                <Link
-                  href="#"
-                  aria-disabled="true"
-                  className="flex h-full flex-col rounded-2xl border border-navy/10 bg-paper p-6 transition-colors hover:border-gold/50"
-                >
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gold-dark">
-                    {it.tag}
-                  </span>
-                  <h3 className="mt-3 text-base font-bold leading-snug text-navy">{it.title}</h3>
-                  <p className="prose-cjk mt-2 flex-1 text-sm text-muted">{it.excerpt}</p>
-                  <span className="mt-4 text-xs font-semibold text-gold-dark">{c.insights.readMore} →</span>
-                </Link>
-              </FadeIn>
-            ))}
+            {c.insights.items.map((it, i) => {
+              const slug = INSIGHT_POSTS[i]?.slug ?? "";
+              return (
+                <FadeIn key={it.title} delay={i * 50} className="h-full">
+                  <Link
+                    href={route(lang, `/insights/${slug}`)}
+                    className="flex h-full flex-col rounded-2xl border border-navy/10 bg-paper p-6 transition-colors hover:border-gold/50 hover:shadow-card"
+                  >
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gold-dark">
+                      {it.tag}
+                    </span>
+                    <h3 className="mt-3 text-base font-bold leading-snug text-navy">{it.title}</h3>
+                    <p className="prose-cjk mt-2 flex-1 text-sm text-muted">{it.excerpt}</p>
+                    <span className="mt-4 text-xs font-semibold text-gold-dark">
+                      {pages(lang).insights.readMore} →
+                    </span>
+                  </Link>
+                </FadeIn>
+              );
+            })}
           </div>
         </div>
       </section>

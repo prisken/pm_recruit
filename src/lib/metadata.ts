@@ -13,7 +13,7 @@ export function pageMetadata({
   description,
 }: {
   lang: Lang;
-  path?: "" | "/book" | "/why-join-us";
+  path?: string;
   title: string;
   description: string;
 }): Metadata {

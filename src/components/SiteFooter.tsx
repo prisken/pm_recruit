@@ -2,11 +2,26 @@ import Link from "next/link";
 import type { Lang } from "@/lib/site";
 import { BRANCHES, SITE, route, waLink } from "@/lib/site";
 import { content } from "@/lib/content";
+import { pages } from "@/lib/pages-content";
 
 export default function SiteFooter({ lang }: { lang: Lang }) {
   const c = content(lang);
+  const p = pages(lang);
   const waText =
     lang === "zh" ? "你好，我想了解資產管理區域的顧問事業。" : "Hi, I'd like to know more about a career in the district.";
+
+  const links: Array<{ href: string; label: string }> = [
+    { href: route(lang, "/why-join-us"), label: p.nav.why },
+    { href: route(lang, "/our-story"), label: p.nav.story },
+    { href: route(lang, "/career-path"), label: p.nav.career },
+    { href: route(lang, "/achievements"), label: p.nav.achievements },
+    { href: route(lang, "/gba"), label: p.nav.gba },
+    { href: route(lang, "/clients"), label: p.nav.clients },
+    { href: route(lang, "/insights"), label: p.nav.insights },
+    { href: route(lang, "/events"), label: p.nav.events },
+    { href: route(lang, "/contact"), label: p.nav.contact },
+    { href: route(lang, "/book"), label: c.nav.book },
+  ];
 
   return (
     <footer className="bg-navy-deep pb-[calc(env(safe-area-inset-bottom,0px)+4.5rem)] pt-14 text-white/70 sm:pb-10">
@@ -69,34 +84,25 @@ export default function SiteFooter({ lang }: { lang: Lang }) {
             </ul>
           </div>
 
-          {/* Quick links */}
+          {/* Quick links — all real routes, no stubs */}
           <div>
             <h2 className="text-sm font-bold uppercase tracking-[0.18em] text-gold">
               {c.footer.quickLinks}
             </h2>
             <ul className="mt-4 space-y-2 text-sm">
+              {links.map((l) => (
+                <li key={l.href}>
+                  <Link className="hover:text-white" href={l.href}>
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
               <li>
-                <Link className="hover:text-white" href={route(lang, "/why-join-us")}>
-                  {c.nav.why}
-                </Link>
-              </li>
-              <li>
-                <Link className="hover:text-white" href={route(lang, "/book")}>
-                  {c.book.heading}
-                </Link>
-              </li>
-              <li>
-                <Link className="hover:text-white" href={`${route(lang, "")}#branches`}>
-                  {c.footer.branchesHeading}
-                </Link>
-              </li>
-              <li>
-                <Link className="hover:text-white" href={`${route(lang, "")}#insights`}>
-                  {c.insights.heading}
-                </Link>
-              </li>
-              <li>
-                <Link className="hover:text-white" href={lang === "zh" ? "/en" : "/"} hrefLang={lang === "zh" ? "en" : "zh-Hant"}>
+                <Link
+                  className="hover:text-white"
+                  href={lang === "zh" ? "/en" : "/"}
+                  hrefLang={lang === "zh" ? "en" : "zh-Hant"}
+                >
                   {c.otherLangName}
                 </Link>
               </li>

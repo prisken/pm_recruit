@@ -77,7 +77,27 @@ export function langHref(lang: Lang) {
   return lang === "zh" ? "/" : "/en";
 }
 
+/**
+ * Every page route in the site (Phase 1 + Phase 2).
+ * zh-Hant lives at the bare path, English is mirrored under /en.
+ */
+export const ROUTES = [
+  "",
+  "/why-join-us",
+  "/our-story",
+  "/career-path",
+  "/achievements",
+  "/gba",
+  "/clients",
+  "/insights",
+  "/events",
+  "/contact",
+  "/book",
+] as const;
+
+export type RoutePath = (typeof ROUTES)[number];
+
 /** Route helpers so zh/en pages always point at their counterpart. */
-export function route(lang: Lang, path: "" | "/book" | "/why-join-us") {
+export function route(lang: Lang, path: string) {
   return lang === "zh" ? path || "/" : `/en${path}`;
 }

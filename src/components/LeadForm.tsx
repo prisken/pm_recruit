@@ -12,8 +12,9 @@ type Errors = Partial<Record<"name" | "phone" | "email" | "time", string>>;
  * Deliberately NOT wired to Google Calendar, Calendly or any mail/API — no data
  * leaves the browser. See the note rendered in the success panel.
  */
-export default function LeadForm({ lang }: { lang: Lang }) {
+export default function LeadForm({ lang, idPrefix = "lf" }: { lang: Lang; idPrefix?: string }) {
   const c = content(lang).book;
+  const id = (k: string) => `${idPrefix}-${k}`;
   const [values, setValues] = useState({ name: "", phone: "", email: "", time: "" });
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState<null | { ref: string; values: typeof values }>(null);
@@ -95,11 +96,11 @@ export default function LeadForm({ lang }: { lang: Lang }) {
     <form onSubmit={onSubmit} noValidate className="rounded-2xl border border-navy/10 bg-white p-6 shadow-card sm:p-8">
       <div className="space-y-5">
         <div>
-          <label htmlFor="name" className="text-sm font-semibold text-navy">
+          <label htmlFor={id("name")} className="text-sm font-semibold text-navy">
             {c.fields.name}
           </label>
           <input
-            id="name"
+            id={id("name")}
             name="name"
             type="text"
             autoComplete="name"
@@ -107,23 +108,23 @@ export default function LeadForm({ lang }: { lang: Lang }) {
             value={values.name}
             data-invalid={errors.name ? "true" : "false"}
             aria-invalid={errors.name ? true : undefined}
-            aria-describedby={errors.name ? "name-error" : undefined}
+            aria-describedby={errors.name ? id("name-error") : undefined}
             onChange={(e) => setValues({ ...values, name: e.target.value })}
             className={`${field} ${errors.name ? "border-red-400" : "border-navy/15"}`}
           />
           {errors.name && (
-            <p id="name-error" className="mt-1.5 text-xs font-medium text-red-600">
+            <p id={id("name-error")} className="mt-1.5 text-xs font-medium text-red-600">
               {errors.name}
             </p>
           )}
         </div>
 
         <div>
-          <label htmlFor="phone" className="text-sm font-semibold text-navy">
+          <label htmlFor={id("phone")} className="text-sm font-semibold text-navy">
             {c.fields.phone}
           </label>
           <input
-            id="phone"
+            id={id("phone")}
             name="phone"
             type="tel"
             inputMode="tel"
@@ -132,23 +133,23 @@ export default function LeadForm({ lang }: { lang: Lang }) {
             value={values.phone}
             data-invalid={errors.phone ? "true" : "false"}
             aria-invalid={errors.phone ? true : undefined}
-            aria-describedby={errors.phone ? "phone-error" : undefined}
+            aria-describedby={errors.phone ? id("phone-error") : undefined}
             onChange={(e) => setValues({ ...values, phone: e.target.value })}
             className={`${field} ${errors.phone ? "border-red-400" : "border-navy/15"}`}
           />
           {errors.phone && (
-            <p id="phone-error" className="mt-1.5 text-xs font-medium text-red-600">
+            <p id={id("phone-error")} className="mt-1.5 text-xs font-medium text-red-600">
               {errors.phone}
             </p>
           )}
         </div>
 
         <div>
-          <label htmlFor="email" className="text-sm font-semibold text-navy">
+          <label htmlFor={id("email")} className="text-sm font-semibold text-navy">
             {c.fields.email}
           </label>
           <input
-            id="email"
+            id={id("email")}
             name="email"
             type="email"
             autoComplete="email"
@@ -156,28 +157,28 @@ export default function LeadForm({ lang }: { lang: Lang }) {
             value={values.email}
             data-invalid={errors.email ? "true" : "false"}
             aria-invalid={errors.email ? true : undefined}
-            aria-describedby={errors.email ? "email-error" : undefined}
+            aria-describedby={errors.email ? id("email-error") : undefined}
             onChange={(e) => setValues({ ...values, email: e.target.value })}
             className={`${field} ${errors.email ? "border-red-400" : "border-navy/15"}`}
           />
           {errors.email && (
-            <p id="email-error" className="mt-1.5 text-xs font-medium text-red-600">
+            <p id={id("email-error")} className="mt-1.5 text-xs font-medium text-red-600">
               {errors.email}
             </p>
           )}
         </div>
 
         <div>
-          <label htmlFor="time" className="text-sm font-semibold text-navy">
+          <label htmlFor={id("time")} className="text-sm font-semibold text-navy">
             {c.fields.time}
           </label>
           <select
-            id="time"
+            id={id("time")}
             name="time"
             value={values.time}
             data-invalid={errors.time ? "true" : "false"}
             aria-invalid={errors.time ? true : undefined}
-            aria-describedby={errors.time ? "time-error" : undefined}
+            aria-describedby={errors.time ? id("time-error") : undefined}
             onChange={(e) => setValues({ ...values, time: e.target.value })}
             className={`${field} ${errors.time ? "border-red-400" : "border-navy/15"}`}
           >
@@ -189,7 +190,7 @@ export default function LeadForm({ lang }: { lang: Lang }) {
             ))}
           </select>
           {errors.time && (
-            <p id="time-error" className="mt-1.5 text-xs font-medium text-red-600">
+            <p id={id("time-error")} className="mt-1.5 text-xs font-medium text-red-600">
               {errors.time}
             </p>
           )}

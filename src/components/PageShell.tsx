@@ -15,7 +15,7 @@ export default function PageShell({
   children,
 }: {
   lang: Lang;
-  active?: "" | "/book" | "/why-join-us";
+  active?: string;
   children: ReactNode;
 }) {
   return (

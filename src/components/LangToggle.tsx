@@ -12,7 +12,7 @@ export default function LangToggle({
   className = "",
 }: {
   lang: Lang;
-  path?: "" | "/book" | "/why-join-us";
+  path?: string;
   className?: string;
 }) {
   const zhHref = path || "/";

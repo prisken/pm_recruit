@@ -1,16 +1,23 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/site";
+import { INSIGHT_SLUGS } from "@/lib/insights";
 
-/**
- * Phase 1 routes only. Blog list/detail routes and the remaining Phase 2 pages
- * get added here when they ship.
- */
+/** Every route in the site, zh-Hant + EN, plus the insight article pages. */
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const routes: Array<{ path: string; priority: number }> = [
     { path: "/", priority: 1 },
+    { path: "/why-join-us", priority: 0.9 },
+    { path: "/our-story", priority: 0.8 },
+    { path: "/career-path", priority: 0.9 },
+    { path: "/achievements", priority: 0.7 },
+    { path: "/gba", priority: 0.8 },
+    { path: "/clients", priority: 0.7 },
+    { path: "/insights", priority: 0.7 },
+    { path: "/events", priority: 0.6 },
+    { path: "/contact", priority: 0.8 },
     { path: "/book", priority: 0.9 },
-    { path: "/why-join-us", priority: 0.7 },
+    ...INSIGHT_SLUGS.map((slug) => ({ path: `/insights/${slug}`, priority: 0.5 })),
   ];
 
   return routes.flatMap(({ path, priority }) => {
