@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0b1b33;
+  --color-navy-deep: #071426;
+  --color-navy-soft: #12294a;
+  --color-navy-line: #1e3a5f;
+  --color-gold: #c8a24a;
+  --color-gold-light: #e3c87f;
+  --color-gold-dark: #9e7c2c;
+  --color-paper: #f8f6f2;
+  --color-ink: #111827;
+  --color-muted: #5b6b82;
+
+  /* System stack only — no external font requests, so first paint stays fast
+     and there are no failed subresource loads in the browser console. */
+  --font-display: system-ui, -apple-system, "Segoe UI", "PingFang HK",
+    "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", "PingFang HK",
+    "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  --font-serif: "Songti TC", "Noto Serif TC", Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Long-form Chinese text needs a little more leading than Latin. */
+.prose-cjk {
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+}
+
+.hairline-gold {
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .fade-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
