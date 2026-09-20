@@ -5,12 +5,14 @@ import PageHero from "@/components/ui/PageHero";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Ladder from "@/components/ui/Ladder";
 import ToConfirm from "@/components/ui/ToConfirm";
+import SeedNote from "@/components/ui/SeedNote";
 import CtaBand from "@/components/ui/CtaBand";
 
 /**
  * Phase 2 — Career path & opportunities.
  * Promotion ladder as a visual (Ladder), the two tracks, how leaders are
- * developed, current openings (marked TO CONFIRM — the corpus has none).
+ * developed, current openings (SEED-1: demo roles, labelled 示範 · seed; the
+ * district's confirmed vacancy list is still TO CONFIRM).
  */
 export default function CareerView({ lang }: { lang: Lang }) {
   const cd = pages(lang).career;
@@ -82,8 +84,19 @@ export default function CareerView({ lang }: { lang: Lang }) {
         <div className="mx-auto max-w-content px-4 sm:px-6">
           <FadeIn>
             <SectionHeading title={cd.openingsHeading} />
-            <div className="mt-5">
-              <ToConfirm lang={lang}>{cd.openingsNote}</ToConfirm>
+            <div className="mt-5 space-y-5">
+              <SeedNote lang={lang} id="SEED-1-openings">{cd.openingsSeedNote}</SeedNote>
+              <ul className="grid gap-4 sm:grid-cols-3">
+                {cd.openings.map((o) => (
+                  <li key={o.role} className="rounded-2xl border border-navy/10 bg-paper p-5">
+                    <p className="text-base font-bold text-navy">{o.role}</p>
+                    <p className="prose-cjk mt-2 text-sm text-muted">{o.note}</p>
+                  </li>
+                ))}
+              </ul>
+              <div>
+                <ToConfirm lang={lang}>{cd.openingsNote}</ToConfirm>
+              </div>
             </div>
           </FadeIn>
         </div>

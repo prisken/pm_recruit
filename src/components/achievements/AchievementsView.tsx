@@ -4,6 +4,7 @@ import FadeIn from "@/components/FadeIn";
 import PageHero from "@/components/ui/PageHero";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ToConfirm from "@/components/ui/ToConfirm";
+import SeedNote from "@/components/ui/SeedNote";
 import CtaBand from "@/components/ui/CtaBand";
 
 /** A simple chip cloud for the real name lists from the corpus. */
@@ -29,7 +30,9 @@ function NameCloud({ names, tone = "light" }: { names: string[]; tone?: "light" 
 /**
  * Phase 2 — Achievements & our people.
  * MDRT / COT name lists, award categories, magazine interviews and CSR —
- * all from the corpus. TOT members and per-award detail are TO CONFIRM.
+ * all from the corpus. TOT members (SEED-3), per-award years (SEED-2) and the
+ * CPB qualification line (SEED-9) are labelled 示範 · seed; the district's
+ * confirmed detail stays TO CONFIRM.
  */
 export default function AchievementsView({ lang }: { lang: Lang }) {
   const a = pages(lang).achievements;
@@ -74,8 +77,12 @@ export default function AchievementsView({ lang }: { lang: Lang }) {
           </FadeIn>
           <FadeIn delay={60}>
             <SectionHeading title={a.totHeading} />
-            <div className="mt-5">
-              <ToConfirm lang={lang}>{a.totNote}</ToConfirm>
+            <div className="mt-5 space-y-4">
+              <SeedNote lang={lang} id="SEED-3-tot">{a.totSeedNote}</SeedNote>
+              <NameCloud names={a.totSeedItems} />
+              <div>
+                <ToConfirm lang={lang}>{a.totNote}</ToConfirm>
+              </div>
             </div>
           </FadeIn>
         </div>
@@ -87,8 +94,12 @@ export default function AchievementsView({ lang }: { lang: Lang }) {
           <FadeIn>
             <SectionHeading title={a.awardsHeading} sub={a.awardsIntro} />
             <NameCloud names={a.awards} />
-            <div className="mt-5">
-              <ToConfirm lang={lang}>{a.awardsNote}</ToConfirm>
+            <div className="mt-5 space-y-3">
+              <SeedNote lang={lang} id="SEED-2-award-years">{a.awardsSeedNote}</SeedNote>
+              <SeedNote lang={lang} id="SEED-9-cpb">{a.cpbNote}</SeedNote>
+              <div>
+                <ToConfirm lang={lang}>{a.awardsNote}</ToConfirm>
+              </div>
             </div>
           </FadeIn>
           <FadeIn delay={60}>

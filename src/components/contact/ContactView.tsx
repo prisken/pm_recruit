@@ -7,6 +7,7 @@ import LeadForm from "@/components/LeadForm";
 import PageHero from "@/components/ui/PageHero";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ToConfirm from "@/components/ui/ToConfirm";
+import { SeedChip } from "@/components/ui/SeedNote";
 import CtaBand from "@/components/ui/CtaBand";
 
 /**
@@ -84,6 +85,10 @@ export default function ContactView({ lang }: { lang: Lang }) {
               <p className="mt-5 text-[11px] font-bold uppercase tracking-[0.14em] text-gold-dark">
                 {ct.officeHoursHeading}
               </p>
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                <p className="text-sm font-medium text-ink">{ct.officeHours}</p>
+                <SeedChip lang={lang} id="SEED-4-office-hours" />
+              </div>
               <div className="mt-3">
                 <ToConfirm lang={lang}>{ct.officeHoursNote}</ToConfirm>
               </div>

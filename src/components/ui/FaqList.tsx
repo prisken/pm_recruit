@@ -1,10 +1,19 @@
+import type { Lang } from "@/lib/site";
 import FadeIn from "@/components/FadeIn";
+import { SeedChip } from "@/components/ui/SeedNote";
 
 /**
  * FAQ list built on native <details> — works with JS disabled, keyboard
- * accessible, and produces no console noise.
+ * accessible, and produces no console noise. An entry carrying `seedId` shows
+ * the 示範 · seed chip next to its (demonstration) answer.
  */
-export default function FaqList({ items }: { items: Array<{ q: string; a: string }> }) {
+export default function FaqList({
+  items,
+  lang,
+}: {
+  items: Array<{ q: string; a: string; seedId?: string }>;
+  lang: Lang;
+}) {
   return (
     <div className="mt-8 space-y-3">
       {items.map((f, i) => (
@@ -19,7 +28,14 @@ export default function FaqList({ items }: { items: Array<{ q: string; a: string
                 ＋
               </span>
             </summary>
-            <p className="prose-cjk border-t border-navy/10 px-5 py-4 text-sm text-muted">{f.a}</p>
+            <div className="prose-cjk border-t border-navy/10 px-5 py-4 text-sm text-muted">
+              {f.seedId ? (
+                <span className="mb-3 inline-block align-middle">
+                  <SeedChip lang={lang} id={f.seedId} />
+                </span>
+              ) : null}
+              <p>{f.a}</p>
+            </div>
           </details>
         </FadeIn>
       ))}

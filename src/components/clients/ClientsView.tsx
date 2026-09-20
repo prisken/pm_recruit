@@ -5,13 +5,15 @@ import FadeIn from "@/components/FadeIn";
 import PageHero from "@/components/ui/PageHero";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ToConfirm from "@/components/ui/ToConfirm";
+import SeedNote from "@/components/ui/SeedNote";
 import CtaBand from "@/components/ui/CtaBand";
 
 /**
  * Phase 2 — What we offer clients.
  * The district's existing high-end services from the corpus, framed as
- * "what you will represent": service platforms, lifestyle events, talks, and
- * the in-house telephone appointment team.
+ * "what you will represent": service platforms (scope is SEED-6, deliberately
+ * generic and number-free), lifestyle events, talks, and the in-house
+ * telephone appointment team.
  */
 export default function ClientsView({ lang }: { lang: Lang }) {
   const cl = pages(lang).clients;
@@ -45,7 +47,12 @@ export default function ClientsView({ lang }: { lang: Lang }) {
               className="h-auto w-full object-cover"
             />
           </div>
-          <ToConfirm lang={lang}>{cl.platformsNote}</ToConfirm>
+          <div className="space-y-3">
+            <SeedNote lang={lang} id="SEED-6-platform-scope">{cl.platformsScope}</SeedNote>
+            <div>
+              <ToConfirm lang={lang}>{cl.platformsNote}</ToConfirm>
+            </div>
+          </div>
         </div>
       </section>
 

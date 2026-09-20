@@ -5,12 +5,14 @@ import LeadForm from "@/components/LeadForm";
 import PageHero from "@/components/ui/PageHero";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ToConfirm from "@/components/ui/ToConfirm";
+import SeedNote from "@/components/ui/SeedNote";
 import CtaBand from "@/components/ui/CtaBand";
 
 /**
  * Phase 2 — Events & activities.
  * Roadshows, exhibitions, team activities and training from the corpus; open
- * days are TO CONFIRM. Each event carries an RSVP form (reuses LeadForm, with
+ * days carry a month-level SEED-5 date (day 待定) and stay TO CONFIRM for the
+ * confirmed schedule. Each event carries an RSVP form (reuses LeadForm, with
  * a unique id prefix so multiple forms on one page stay valid HTML).
  */
 export default function EventsView({ lang }: { lang: Lang }) {
@@ -35,6 +37,24 @@ export default function EventsView({ lang }: { lang: Lang }) {
                   </div>
                   {it.intro ? (
                     <p className="prose-cjk mt-3 max-w-3xl text-sm text-ink/80">{it.intro}</p>
+                  ) : null}
+
+                  {it.seedItems?.length ? (
+                    <div className="mt-4 space-y-3">
+                      <SeedNote lang={lang} id={it.seedId ?? `SEED-event-${it.id}`}>
+                        {it.seedNote}
+                      </SeedNote>
+                      <ul className="flex flex-wrap gap-2">
+                        {it.seedItems.map((l) => (
+                          <li
+                            key={l}
+                            className="rounded-full border border-gold/40 bg-gold/10 px-3 py-1.5 text-xs font-medium text-gold-dark"
+                          >
+                            {l}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   ) : null}
 
                   {isToConfirm ? (

@@ -5,6 +5,7 @@ import FadeIn from "@/components/FadeIn";
 import PageHero from "@/components/ui/PageHero";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ToConfirm from "@/components/ui/ToConfirm";
+import SeedNote from "@/components/ui/SeedNote";
 import CtaBand from "@/components/ui/CtaBand";
 
 /**
@@ -134,12 +135,28 @@ export default function StoryView({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      {/* Milestones */}
+      {/* Milestones — SEED-7 timeline uses corpus facts only. */}
       <section className="mx-auto max-w-content px-4 py-14 sm:px-6">
         <FadeIn>
           <SectionHeading title={s.bannerHeading} />
-          <div className="mt-5">
-            <ToConfirm lang={lang}>{s.bannerNote}</ToConfirm>
+          <div className="mt-5 space-y-5">
+            <SeedNote lang={lang} id="SEED-7-milestones">{s.milestonesSeedNote}</SeedNote>
+            <ol className="space-y-4">
+              {s.milestonesSeed.map((m) => (
+                <li
+                  key={`${m.when}-${m.what}`}
+                  className="rounded-2xl border border-navy/10 bg-white p-5 shadow-card"
+                >
+                  <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-gold-dark">
+                    {m.when}
+                  </p>
+                  <p className="prose-cjk mt-2 text-sm text-ink/80">{m.what}</p>
+                </li>
+              ))}
+            </ol>
+            <div>
+              <ToConfirm lang={lang}>{s.bannerNote}</ToConfirm>
+            </div>
           </div>
         </FadeIn>
       </section>

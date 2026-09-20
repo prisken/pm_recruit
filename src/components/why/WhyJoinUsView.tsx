@@ -86,7 +86,7 @@ export default function WhyJoinUsView({ lang }: { lang: Lang }) {
         <FadeIn>
           <SectionHeading title={w.faqHeading} />
         </FadeIn>
-        <FaqList items={w.faq} />
+        <FaqList items={w.faq} lang={lang} />
         <div className="mt-5">
           <p className="text-xs leading-relaxed text-muted">{w.faqNote}</p>
         </div>

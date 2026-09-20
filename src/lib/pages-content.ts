@@ -11,6 +11,22 @@ import type { Lang } from "@/lib/site";
  * `toConfirm` is the shared marker string; views render it with <ToConfirm>.
  */
 
+/** One FAQ entry. `seedId` marks an answer that is demonstration copy. */
+type FaqItem = { q: string; a: string; seedId?: string };
+
+/** One events-page activity. `seed*` marks demonstration copy. */
+type EventItem = {
+  id: string;
+  type: string;
+  heading: string;
+  intro: string;
+  list: string[];
+  note: string;
+  seedId?: string;
+  seedItems?: string[];
+  seedNote?: string;
+};
+
 const zh = {
   toConfirm: "待確認 / TO CONFIRM",
 
@@ -119,9 +135,11 @@ const zh = {
       },
       {
         q: "入職要求、牌照與申請流程？",
-        a: "待確認 / TO CONFIRM — 具體入職門檻、所需牌照與申請流程的官方說明未載於區域現有網站，需由區域提供後補上。",
+        // SEED-8 · FAQ entry requirements — standard, uncontroversial lines.
+        seedId: "SEED-8-faq-entry",
+        a: "示範（一般入職要求）：年滿 18 歲 · 持有效香港身份證 · 中學文憑或以上學歷 · 通過入職面試及相關考核。所需牌照、正式門檻與申請流程以區域及友邦的官方資料為準。",
       },
-    ],
+    ] as FaqItem[],
     faqNote: "以上答案均取自區域對外公佈的內容；如與最新安排有出入，以區域的正式資料為準。",
     ctaHeading: "想先聊聊，再決定？",
     ctaBody:
@@ -157,6 +175,20 @@ const zh = {
     ],
     cultureItems: ["Annual Dinner", "賀歲盃", "MDRT Dinner", "遊船河"],
     bannerHeading: "區域大事回顧",
+    // SEED-7 · milestones — corpus facts only (2009 founding · 50 → 500 ·
+    // rail-branch deployment). No invented intermediate years or headcounts:
+    // an unknown year is labelled, never guessed.
+    milestonesSeed: [
+      { when: "2009", what: "陳永業先生於金融海嘯之年創立「資產管理區域」；同年加入友邦並創立友邦資產管理品牌。" },
+      { when: "創區之初", what: "營業團隊由 50 人起步，區域由一個小團隊開始經營。" },
+      {
+        when: "近年（年份待定）",
+        what: "於全港鐵路口岸部署分行——西九高鐵站、羅湖、落馬洲，並成為全港鐵路唯一的保險合作夥伴。",
+      },
+      { when: "今天", what: "營業團隊發展至 500 位精英顧問，並設有兩條晉升階梯。" },
+    ],
+    milestonesSeedNote:
+      "示範時間線：以上各點只採用區域現有網站已載的事實；未提供的中間年份與人數一律留白，不作推算。",
     bannerNote:
       "區域現有網站設有「區域大事回顧」，記錄由 2010 年創區至今的所有年度主題。待確認 / TO CONFIRM — 逐年主題與大事需由區域提供後補上。",
     chairmanHeading: "陳總的話",
@@ -237,9 +269,17 @@ const zh = {
       "區域設有龐大的後勤基建力量，加上自設的電話預約團隊為顧問安排客戶會議，讓同事把時間放回客戶與專業成長上。",
     ],
     openingsHeading: "現正招聘",
+    // SEED-1 · current openings — demo roles only; replace with the district's
+    // confirmed vacancy list. No headcount and no dates, on purpose.
+    openingsSeedNote:
+      "示範職位（常設招聘）：以下為示範描述，並非已確認的空缺清單；實際職位、名額與申請安排以區域正式資料為準。",
+    openings: [
+      { role: "見習財務策劃顧問", note: "常設招聘 · 事業起點，設在職培訓" },
+      { role: "財務策劃顧問", note: "常設招聘 · 可選個人銷售或營業管理階梯" },
+      { role: "區域經理／團隊發展", note: "常設招聘 · 帶領團隊、培育新同事" },
+    ] as Array<{ role: string; note: string }>,
     openingsNote:
       "待確認 / TO CONFIRM — 具體職位空缺清單未在區域現有網站公佈，需由區域提供後補上。本頁的申請意願仍可透過下方預約或 WhatsApp 提交。",
-    openings: [] as Array<{ role: string; note: string }>,
     ctaHeading: "想了解哪條階梯適合你？",
     ctaBody: "見面時，我們可以一起看你的背景，談談個人銷售或營業管理哪一條路更適合你。",
   },
@@ -314,6 +354,9 @@ const zh = {
       "超級百萬圓桌會員（Court of the Table – COT）為國際公認壽險從業人員最高榮譽，COT 的業績是 MDRT 的 3 倍。",
     cotMembers: ["Echo Zhang", "Gigi Sheung", "Benny Lam", "Kendy Yeung"],
     totHeading: "TOT 頂尖百萬圓桌會員",
+    // SEED-3 · TOT members — illustrative placeholders only; no real names.
+    totSeedItems: ["示範會員 A", "示範會員 B", "示範會員 C"],
+    totSeedNote: "示範名單：以上條目為示範佔位，並非真實 TOT 會員；正式名單待區域提供。",
     totNote:
       "待確認 / TO CONFIRM — 區域現有網站只列出「頂尖百萬圓桌會員」這個獎項類別，未提供名單。",
     listNote: "以上名單為 2022 年度，取自區域現有網站。",
@@ -327,6 +370,12 @@ const zh = {
       "區域年度大獎",
       "區域培訓領袖",
     ],
+    // SEED-2 · award years — the 2022 lists above stay corpus-sourced.
+    awardsSeedNote:
+      "示範：2022 年度名單取自區域現有網站；其餘年度的得獎名單、人數與細節尚未提供，將由區域補上。",
+    // SEED-9 · CPB — qualification only; no member names invented.
+    cpbNote:
+      "示範：區域同事會考取多個業界認可的專業資格（包括 CPB）；相關名單與人數待區域確認後補上，現為示範內容。",
     awardsNote:
       "待確認 / TO CONFIRM — 各獎項的年度、得獎人數與細節未在區域現有網站公佈，需由區域提供後補上。",
     mediaHeading: "雜誌專訪",
@@ -395,6 +444,9 @@ const zh = {
       { title: "零售及私人銀行", body: "銀行端的零售與私人銀行服務配套。" },
       { title: "醫療", body: "醫療相關的保障與服務安排。" },
     ],
+    // SEED-6 · service-platform scope — deliberately generic, no figures.
+    platformsScope:
+      "示範（服務範圍）：區域服務平台涵蓋客戶諮詢、方案設計、投保安排、保單跟進與售後支援等環節；各平台的詳細分工與適用範圍以區域正式資料為準。",
     platformsNote:
       "平台名稱取自區域現有網站的「區域服務平台」圖示；各平台的詳細服務範圍需由區域確認。待確認 / TO CONFIRM。",
     lifestyleHeading: "品味生活",
@@ -492,9 +544,13 @@ const zh = {
         heading: "開放日",
         intro: "",
         list: [] as string[],
+        // SEED-5 · open-day date — month level only; the day itself stays 待定.
+        seedId: "SEED-5-open-day",
+        seedItems: ["2026 年 10 月（日期待定）"],
+        seedNote: "示範：開放日暫定於上述月份舉行，具體日期、地點與形式待區域確認。",
         note: "待確認 / TO CONFIRM — 開放日的日期、地點與形式未在區域現有網站公佈，需由區域提供後補上。",
       },
-    ],
+    ] as EventItem[],
     rsvpHeading: "報名 / 留位",
     rsvpIntro: "選擇你有興趣的活動，填寫資料留位。這是預覽版本的示範表單，資料不會傳送或儲存到任何地方。",
     rsvpSubmit: "我有興趣",
@@ -516,6 +572,8 @@ const zh = {
     faxLabel: "傳真",
     officeHeading: "辦公室",
     officeHoursHeading: "辦公時間",
+    // SEED-4 · HQ office hours — generic and easy to replace.
+    officeHours: "星期一至五 09:30 – 18:30 · 週末及公眾假期休息",
     officeHoursNote: "待確認 / TO CONFIRM — 辦公室的對外開放時間未在區域現有網站公佈，需由區域提供後補上。",
     branchesHeading: "鐵路分行",
     branchesNote: "分行地址與營業時間取自區域現有網站。",
@@ -802,9 +860,11 @@ const en: PagesCopy = {
       },
       {
         q: "Entry requirements, licences and the application process?",
-        a: "TO CONFIRM / 待確認 — an official description of the entry threshold, required licences and application process is not published on the district's current website and must be supplied by the district.",
+        // SEED-8 · FAQ entry requirements — standard, uncontroversial lines.
+        seedId: "SEED-8-faq-entry",
+        a: "Sample (general entry requirements): aged 18 or above · valid Hong Kong identity card · secondary-school diploma (DSE) or above · pass the entry interview and relevant assessments. The required licences, official thresholds and application process follow the district's and AIA's official material.",
       },
-    ],
+    ] as FaqItem[],
     faqNote: "Answers are drawn from the district's own published material; where arrangements have changed, the district's official information prevails.",
     ctaHeading: "Want to talk it through first?",
     ctaBody:
@@ -840,6 +900,20 @@ const en: PagesCopy = {
     ],
     cultureItems: ["Annual Dinner", "Lunar New Year Cup", "MDRT Dinner", "Boat trip"],
     bannerHeading: "District milestones",
+    // SEED-7 · milestones — corpus facts only (2009 founding · 50 → 500 ·
+    // rail-branch deployment). No invented intermediate years or headcounts:
+    // an unknown year is labelled, never guessed.
+    milestonesSeed: [
+      { when: "2009", what: "Mr Chan Wing Yip founded the Portfolio Management District in the year of the financial crisis, joining AIA and founding its asset-management brand the same year." },
+      { when: "At founding", what: "The sales force started with 50 people, growing the district from a small team." },
+      {
+        when: "Recent years (year not supplied)",
+        what: "Branches were deployed at every rail border crossing — West Kowloon high-speed rail, Lo Wu and Lok Ma Chau — making the district the only insurance partner on Hong Kong's rail network.",
+      },
+      { when: "Today", what: "The sales force has grown to 500 consultants, supported by two promotion ladders." },
+    ],
+    milestonesSeedNote:
+      "Sample timeline: every point uses only facts already published on the district's current website; unknown intermediate years and headcounts are left blank, never estimated.",
     bannerNote:
       "The district's current website carries a \"district milestones\" section recording annual themes from 2010 to today. TO CONFIRM / 待確認 — the year-by-year themes and milestones must be supplied by the district.",
     chairmanHeading: "Chairman's message",
@@ -921,9 +995,17 @@ const en: PagesCopy = {
       "The district holds substantial back-office infrastructure and employs its own telephone appointment team to book client meetings, so consultants can put their time back into clients and professional growth.",
     ],
     openingsHeading: "Current openings",
+    // SEED-1 · current openings — demo roles only; replace with the district's
+    // confirmed vacancy list. No headcount and no dates, on purpose.
+    openingsSeedNote:
+      "Sample roles (always open): these are illustrative descriptions, not a confirmed vacancy list. Actual roles, headcount and application arrangements follow the district's official material.",
+    openings: [
+      { role: "Trainee Financial Planning Consultant", note: "Always open · entry point, structured on-the-job training" },
+      { role: "Financial Planning Consultant", note: "Always open · personal sales or business management track" },
+      { role: "District Manager / Team Development", note: "Always open · leading and developing a team" },
+    ] as Array<{ role: string; note: string }>,
     openingsNote:
       "TO CONFIRM / 待確認 — a specific list of job openings is not published on the district's current website and must be supplied by the district. You can still register your interest via the booking button or WhatsApp below.",
-    openings: [] as Array<{ role: string; note: string }>,
     ctaHeading: "Which ladder suits you?",
     ctaBody: "When we meet we can look at your background together and talk about whether personal sales or business management fits you better.",
   },
@@ -997,6 +1079,10 @@ const en: PagesCopy = {
       "Court of the Table (COT) is internationally recognised as the highest honour for life-insurance professionals; COT production is three times MDRT.",
     cotMembers: ["Echo Zhang", "Gigi Sheung", "Benny Lam", "Kendy Yeung"],
     totHeading: "TOT — Top of the Table",
+    // SEED-3 · TOT members — illustrative placeholders only; no real names.
+    totSeedItems: ["Sample member A", "Sample member B", "Sample member C"],
+    totSeedNote:
+      "Sample list: these entries are placeholders, not real TOT members. The official list follows from the district.",
     totNote:
       "TO CONFIRM / 待確認 — the district's current website lists Top of the Table only as an award category, with no member list.",
     listNote: "The lists above are for 2022 and are taken from the district's current website.",
@@ -1010,6 +1096,12 @@ const en: PagesCopy = {
       "District annual grand award",
       "District training leader",
     ],
+    // SEED-2 · award years — the 2022 lists above stay corpus-sourced.
+    awardsSeedNote:
+      "Sample: the 2022 lists above are taken from the district's current website; award lists, recipient counts and detail for other years have not been supplied and will follow from the district.",
+    // SEED-9 · CPB — qualification only; no member names invented.
+    cpbNote:
+      "Sample: district consultants obtain several industry-recognised professional qualifications (including CPB). The related list and figures are pending the district's confirmation and are shown here as sample content.",
     awardsNote:
       "TO CONFIRM / 待確認 — the year, number of recipients and details for each award are not published on the district's current website and must be supplied by the district.",
     mediaHeading: "Magazine interviews",
@@ -1076,6 +1168,9 @@ const en: PagesCopy = {
       { title: "Retail & private banking", body: "Retail and private-banking service support on the bank side." },
       { title: "Medical", body: "Medical-related protection and service arrangements." },
     ],
+    // SEED-6 · service-platform scope — deliberately generic, no figures.
+    platformsScope:
+      "Sample (scope of support): the district's service platforms cover client consultation, solution design, application handling, policy servicing and after-sales support. The detailed remit and applicability of each platform follow the district's official material.",
     platformsNote:
       "Platform names are taken from the district's current \"district service platforms\" graphic; the detailed scope of each platform must be confirmed by the district. TO CONFIRM / 待確認.",
     lifestyleHeading: "Lifestyle events",
@@ -1186,10 +1281,15 @@ const en: PagesCopy = {
         heading: "Open days",
         intro: "",
         list: [] as string[],
+        // SEED-5 · open-day date — month level only; the day itself stays TBD.
+        seedId: "SEED-5-open-day",
+        seedItems: ["October 2026 (date TBD)"],
+        seedNote:
+          "Sample: the open day is provisionally planned in the month above; the exact date, venue and format are pending the district's confirmation.",
         note:
           "TO CONFIRM / 待確認 — dates, locations and format for open days are not published on the district's current website and must be supplied by the district.",
       },
-    ],
+    ] as EventItem[],
     rsvpHeading: "Reserve a place",
     rsvpIntro:
       "Pick the activities you are interested in and leave your details. This is a preview-only demo form — nothing is sent or stored anywhere.",
@@ -1211,6 +1311,8 @@ const en: PagesCopy = {
     faxLabel: "Fax",
     officeHeading: "Office",
     officeHoursHeading: "Office hours",
+    // SEED-4 · HQ office hours — generic and easy to replace.
+    officeHours: "Monday – Friday, 09:30 – 18:30 · Closed weekends and public holidays",
     officeHoursNote:
       "TO CONFIRM / 待確認 — public office hours are not published on the district's current website and must be supplied by the district.",
     branchesHeading: "Rail branches",
