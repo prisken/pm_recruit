@@ -55,3 +55,18 @@ npm run dev     # local dev
 npm run build   # production build
 vercel deploy --prod --yes
 ```
+
+## Deploying
+
+- **Preview:** https://portfolio-management-preview.vercel.app
+- **Vercel project:** `prisken-projects-61a29b86/portfolio-management-preview` — **linked to this repo**,
+  so a push to `main` deploys here automatically.
+- **Repo:** https://github.com/prisken/pm_recruit
+
+Deploy targets are easy to get wrong: this repo was briefly connected to a *second* project
+(`portfolio-management-site`) while the preview URL above belonged to a project with no git link —
+so pushes did not reach the URL everyone was checking. Both are named similarly; the git link now
+points at `portfolio-management-preview`, the project behind the URL in active use.
+`portfolio-management-site` is now unlinked and can be deleted from the dashboard.
+
+Manual deploy, if ever needed: `vercel deploy --prod --yes` from this directory.
