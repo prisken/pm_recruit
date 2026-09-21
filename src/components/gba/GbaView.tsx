@@ -6,7 +6,9 @@ import FadeIn from "@/components/FadeIn";
 import PageHero from "@/components/ui/PageHero";
 import SectionHeading from "@/components/ui/SectionHeading";
 import StationMap from "@/components/ui/StationMap";
+import AssetImage from "@/components/ui/AssetImage";
 import CtaBand from "@/components/ui/CtaBand";
+import { BRAND } from "@/lib/brand-assets";
 
 /**
  * Phase 2 — Greater Bay Area opportunity & locations.
@@ -42,6 +44,11 @@ export default function GbaView({ lang }: { lang: Lang }) {
         <div className="mx-auto max-w-content px-4 sm:px-6">
           <FadeIn>
             <SectionHeading title={g.branchesHeading} sub={g.branchesIntro} />
+          </FadeIn>
+          <FadeIn delay={40}>
+            <div className="mt-8 overflow-hidden rounded-2xl border border-navy/10 bg-paper shadow-card">
+              <AssetImage image={BRAND.branchMap} lang={lang} className="block w-full" />
+            </div>
           </FadeIn>
           <div className="mt-9 grid gap-5 md:grid-cols-3">
             {BRANCHES.map((b, i) => (

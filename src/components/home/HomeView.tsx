@@ -6,6 +6,8 @@ import { content } from "@/lib/content";
 import { pages } from "@/lib/pages-content";
 import { INSIGHT_POSTS } from "@/lib/insights";
 import FadeIn from "@/components/FadeIn";
+import AssetImage from "@/components/ui/AssetImage";
+import { BRAND, PILLAR_IMAGES, blogImageFor } from "@/lib/brand-assets";
 
 /**
  * All homepage sections, shared by / (zh-Hant) and /en.
@@ -90,9 +92,17 @@ export default function HomeView({ lang }: { lang: Lang }) {
           {c.pillars.map((p, i) => (
             <FadeIn key={p.title} delay={i * 60}>
               <article className="h-full rounded-2xl border border-navy/10 bg-white p-6 shadow-card transition-shadow hover:shadow-gold sm:p-7">
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/40 text-sm font-bold text-gold-dark">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+                <div className="flex items-start justify-between gap-4">
+                  <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gold/40 text-sm font-bold text-gold-dark">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <AssetImage
+                    image={PILLAR_IMAGES[i]}
+                    lang={lang}
+                    className="block h-16 w-16 shrink-0 overflow-hidden rounded-xl border border-navy/10 sm:h-20 sm:w-20"
+                    imgClassName="h-full w-full object-cover"
+                  />
+                </div>
                 <h3 className="mt-4 text-lg font-bold leading-snug text-navy">{p.title}</h3>
                 <p className="prose-cjk mt-3 text-sm text-muted">{p.body}</p>
               </article>
@@ -113,6 +123,12 @@ export default function HomeView({ lang }: { lang: Lang }) {
                   {p}
                 </p>
               ))}
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={80}>
+            <div className="mt-10 max-w-3xl overflow-hidden rounded-2xl border border-white/10">
+              <AssetImage image={BRAND.gbaSection} lang={lang} className="block w-full" />
             </div>
           </FadeIn>
 
@@ -160,9 +176,17 @@ export default function HomeView({ lang }: { lang: Lang }) {
                   &ldquo;
                 </span>
                 <blockquote className="prose-cjk mt-3 flex-1 text-sm text-ink/85">{t.quote}</blockquote>
-                <figcaption className="mt-5 border-t border-navy/10 pt-4">
-                  <p className="text-sm font-semibold text-navy">{t.name}</p>
-                  <p className="text-xs text-muted">{t.detail}</p>
+                <figcaption className="mt-5 flex items-center gap-3 border-t border-navy/10 pt-4">
+                  <AssetImage
+                    image={BRAND.testimonials[i % BRAND.testimonials.length]}
+                    lang={lang}
+                    className="block h-11 w-11 shrink-0 overflow-hidden rounded-full border border-gold/40"
+                    imgClassName="h-full w-full object-cover"
+                  />
+                  <div>
+                    <p className="text-sm font-semibold text-navy">{t.name}</p>
+                    <p className="text-xs text-muted">{t.detail}</p>
+                  </div>
                 </figcaption>
               </figure>
             </FadeIn>
@@ -180,12 +204,23 @@ export default function HomeView({ lang }: { lang: Lang }) {
           <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {c.insights.items.map((it, i) => {
               const slug = INSIGHT_POSTS[i]?.slug ?? "";
+              const blogImage = blogImageFor(slug);
               return (
                 <FadeIn key={it.title} delay={i * 50} className="h-full">
                   <Link
                     href={route(lang, `/insights/${slug}`)}
                     className="flex h-full flex-col rounded-2xl border border-navy/10 bg-paper p-6 transition-colors hover:border-gold/50 hover:shadow-card"
                   >
+                    {blogImage ? (
+                      <div className="mb-4 overflow-hidden rounded-xl border border-navy/10">
+                        <AssetImage
+                          image={blogImage}
+                          lang={lang}
+                          className="block w-full"
+                          imgClassName="block h-auto w-full object-cover"
+                        />
+                      </div>
+                    ) : null}
                     <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gold-dark">
                       {it.tag}
                     </span>

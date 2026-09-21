@@ -1,5 +1,8 @@
 import Link from "next/link";
 import FadeIn from "@/components/FadeIn";
+import AssetImage from "@/components/ui/AssetImage";
+import type { Lang } from "@/lib/site";
+import type { BrandImage } from "@/lib/brand-assets";
 
 /**
  * Blog / insight card. Links to a real article route (`/insights/<slug>` or
@@ -13,6 +16,8 @@ export default function InsightCard({
   readMore,
   slot,
   delay = 0,
+  image,
+  lang,
 }: {
   href: string;
   tag: string;
@@ -21,6 +26,9 @@ export default function InsightCard({
   readMore: string;
   slot?: string;
   delay?: number;
+  /** optional delivered blog artwork (slug-matched) */
+  image?: BrandImage | null;
+  lang: Lang;
 }) {
   return (
     <FadeIn delay={delay} className="h-full">
@@ -28,6 +36,16 @@ export default function InsightCard({
         href={href}
         className="flex h-full flex-col rounded-2xl border border-navy/10 bg-paper p-6 transition-colors hover:border-gold/50 hover:shadow-card"
       >
+        {image ? (
+          <div className="mb-4 overflow-hidden rounded-xl border border-navy/10">
+            <AssetImage
+              image={image}
+              lang={lang}
+              className="block w-full"
+              imgClassName="block h-auto w-full object-cover"
+            />
+          </div>
+        ) : null}
         <span className="flex flex-wrap items-center gap-2">
           <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gold-dark">{tag}</span>
           {slot ? (

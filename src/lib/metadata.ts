@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { Lang } from "@/lib/site";
 import { SITE } from "@/lib/site";
+import { BRAND } from "@/lib/brand-assets";
 
 /**
  * Shared per-page metadata with hreflang alternates.
@@ -39,6 +40,21 @@ export function pageMetadata({
       siteName: `${SITE.nameZh} ${SITE.nameEn}`,
       locale: lang === "zh" ? "zh_HK" : "en_HK",
       type: "website",
+      // PNG, not WebP — some scrapers still reject WebP for og:image.
+      images: [
+        {
+          url: BRAND.ogShare.src,
+          width: BRAND.ogShare.width,
+          height: BRAND.ogShare.height,
+          alt: BRAND.ogShare.alt[lang],
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [BRAND.ogShare.src],
     },
   };
 }

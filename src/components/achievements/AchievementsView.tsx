@@ -5,7 +5,9 @@ import PageHero from "@/components/ui/PageHero";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ToConfirm from "@/components/ui/ToConfirm";
 import SeedNote from "@/components/ui/SeedNote";
+import AssetImage from "@/components/ui/AssetImage";
 import CtaBand from "@/components/ui/CtaBand";
+import { BRAND } from "@/lib/brand-assets";
 
 /** A simple chip cloud for the real name lists from the corpus. */
 function NameCloud({ names, tone = "light" }: { names: string[]; tone?: "light" | "dark" }) {
@@ -65,6 +67,14 @@ export default function AchievementsView({ lang }: { lang: Lang }) {
           </FadeIn>
         </div>
         <p className="mt-6 text-xs text-muted">{a.listNote}</p>
+
+        {/* Placeholder strip — six dashed chips, labelled 示範佔位 · PLACEHOLDER
+            in the artwork. Swap for the official marks once supplied. */}
+        <FadeIn delay={80}>
+          <div className="mt-10 overflow-hidden rounded-2xl border border-navy/10 bg-white p-4 shadow-card">
+            <AssetImage image={BRAND.trustBadges} lang={lang} className="block w-full" />
+          </div>
+        </FadeIn>
       </section>
 
       {/* COT + TOT */}

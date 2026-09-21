@@ -6,7 +6,9 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import Ladder from "@/components/ui/Ladder";
 import ToConfirm from "@/components/ui/ToConfirm";
 import SeedNote from "@/components/ui/SeedNote";
+import AssetImage from "@/components/ui/AssetImage";
 import CtaBand from "@/components/ui/CtaBand";
+import { BRAND } from "@/lib/brand-assets";
 
 /**
  * Phase 2 — Career path & opportunities.
@@ -31,6 +33,13 @@ export default function CareerView({ lang }: { lang: Lang }) {
           />
         </FadeIn>
         <Ladder stages={cd.ladder} />
+
+        {/* Bilingual stage infographic — sample stage names on the artwork. */}
+        <FadeIn delay={80}>
+          <div className="mx-auto mt-12 max-w-md overflow-hidden rounded-2xl border border-navy/10 bg-white p-3 shadow-card">
+            <AssetImage image={BRAND.careerLadder} lang={lang} className="block w-full" />
+          </div>
+        </FadeIn>
       </section>
 
       {/* Two tracks */}

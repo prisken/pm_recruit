@@ -3,6 +3,7 @@ import type { Lang } from "@/lib/site";
 import { route } from "@/lib/site";
 import { pages, listPosts } from "@/lib/pages-content";
 import { INSIGHT_POSTS } from "@/lib/insights";
+import { blogImageFor } from "@/lib/brand-assets";
 import FadeIn from "@/components/FadeIn";
 import PageHero from "@/components/ui/PageHero";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -31,6 +32,8 @@ export default function InsightsView({ lang }: { lang: Lang }) {
         readMore={ins.readMore}
         slot={m?.slot === "calendar" ? ins.calendarLabel : undefined}
         delay={i * 50}
+        image={blogImageFor(post.slug)}
+        lang={lang}
       />
     );
   };
